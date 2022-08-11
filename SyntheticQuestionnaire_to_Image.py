@@ -32,6 +32,7 @@ import random
 import uuid
 import math
 import csv
+import os
 
 from PIL import Image, ImageDraw
 
@@ -118,7 +119,10 @@ for x in range(Subjects):
     # ListofVals.append(DirichletProbabilities.tolist())
     # QuestionsandProbabilities.append([AnsweredQuestion, DirichletProbabilities])
 path = 'Synthetic_Questionnaire_Images'
-# basePath = os.path.sep.join([inputPath, "{0}".format('*')])
+# if the label output directory does not exist, create it
+if not os.path.exists(path):
+    print("[INFO] 'creating {}' directory".format(path))
+    os.makedirs(path)
 with open(path+"/Synthetic_Questionnaire_Answers.txt", "w", newline="") as f:
     writer = csv.writer(f)
     writer.writerows(AllSubjectsAnswers)
